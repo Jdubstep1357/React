@@ -2,13 +2,18 @@
 // src/components/ListGroup.tsx
 function ListGroup() {
 
-    const items = [
+    let items = [
         'New York',
         'San Fransisco',
         'Tokyo',
         'London',
         'Paris'
     ];
+    items = [];
+
+
+
+
 
     // take each element and convert it to a different type
     items.map(item => <li>{ item } </li>)
@@ -16,6 +21,9 @@ function ListGroup() {
   return (
    <>
     <h1>List</h1>
+    { /* writing Javascript in JSX markup */ 
+        items.length === 0 && <p>No itemm found</p>
+    }
       <ul className="list-group">
 
         {/* key: each list should have a uniquie key to keep track of items. when things are added or removed dynamically
