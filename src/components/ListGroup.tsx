@@ -1,3 +1,4 @@
+import type { MouseEvent } from "react";
 
 // src/components/ListGroup.tsx
 function ListGroup() {
@@ -9,14 +10,12 @@ function ListGroup() {
         'London',
         'Paris'
     ];
-    items = [];
 
 
+    // Event Handler - Handles clcik Event
+    // type annation in typescript - specific type of variables, ect
+    const handleClick = (event:MouseEvent) => console.log(event);
 
-
-
-    // take each element and convert it to a different type
-    items.map(item => <li>{ item } </li>)
 
   return (
    <>
@@ -28,7 +27,13 @@ function ListGroup() {
 
         {/* key: each list should have a uniquie key to keep track of items. when things are added or removed dynamically
         react knows which things were updated */}
-        {items.map(item => <li key={item}>{ item }</li>)}
+        {items.map((item, index) => 
+        <li className="list-group-item" 
+        key={item} 
+        onClick={handleClick
+        }>{ item }
+        
+        </li>)}
 
 
     {/*       
