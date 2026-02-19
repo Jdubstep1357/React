@@ -1,16 +1,42 @@
 
 // src/components/ListGroup.tsx
 function ListGroup() {
-  return <>
+
+    const items = [
+        'New York',
+        'San Fransisco',
+        'Tokyo',
+        'London',
+        'Paris'
+    ];
+
+    // take each element and convert it to a different type
+    items.map(item => <li>{ item } </li>)
+
+  return (
+   <>
     <h1>List</h1>
       <ul className="list-group">
-      <li className="list-group-item">An item</li>
+
+        {/* key: each list should have a uniquie key to keep track of items. when things are added or removed dynamically
+        react knows which things were updated */}
+        {items.map(item => <li key={item}>{ item }</li>)}
+
+
+    {/*       
+        items.map similar to above
+    <li className="list-group-item">An item</li>
       <li className="list-group-item">A second item</li>
       <li className="list-group-item">A third item</li>
       <li className="list-group-item">A fourth item</li>
-      <li className="list-group-item">And a fifth one</li>
+      <li className="list-group-item">And a fifth one</li>  */
+      }      
+
+
+
       </ul>
   </>
+  )
 }
 
 export default ListGroup;
