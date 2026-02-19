@@ -1,4 +1,6 @@
 import Alert from "./components/Alert";
+import Button from "./components/Button";
+import { useState } from "react";
 
 /* NOTES
 
@@ -26,11 +28,16 @@ import Alert from "./components/Alert";
 
 
 function App() {
+
+  // used in showing / hiding button when clicked
+  // when clicked set setAlertVisibility to true instead of false
+  // onClose cojmes from Alert.tsx which notifies when user clicks on close button. once it's clicked it's set to false
+  const [alertVisible, setAlertVisibility] = useState(false);
+
   return (
     <div>
-      <Alert>
-        Hello World
-      </Alert>
+      { alertVisible && <Alert onClose={() => setAlertVisibility(false)}>My alert</Alert>}
+      <Button color="primary" onClick={() => setAlertVisibility(true)}>My button</Button>
     </div>
   )
 }
