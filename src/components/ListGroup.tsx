@@ -3,10 +3,14 @@ import { useState } from "react";
 interface Props {
     items: string[];
     heading: string;
+    // (item: string) => void
+    // onClick
+    // onSelectItem is referenced in App.tsx
+    onSelectItem: (item: string) => void; 
 }
 
 // src/components/ListGroup.tsx
-function ListGroup({ items, heading }: Props) {
+function ListGroup({ items, heading, onSelectItem }: Props) {
 
 
     // arr[0] variable (sselectedIndex)
@@ -35,7 +39,10 @@ function ListGroup({ items, heading }: Props) {
         {items.map((item, index) => 
         <li className={ selectedIndex === index ? 'list-group-item active' : 'list-group-item'}
         key={item} 
-        onClick={() => { setSelectedIndex(index); }}
+        onClick={() => { 
+            setSelectedIndex(index); 
+            onSelectItem(item);
+        }}
         >{ item }
         
         </li>)}
