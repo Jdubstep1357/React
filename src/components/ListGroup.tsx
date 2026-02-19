@@ -1,15 +1,13 @@
 import { useState } from "react";
 
-// src/components/ListGroup.tsx
-function ListGroup() {
+interface Props {
+    items: string[];
+    heading: string;
+}
 
-    let items = [
-        'New York',
-        'San Fransisco',
-        'Tokyo',
-        'London',
-        'Paris'
-    ];
+// src/components/ListGroup.tsx
+function ListGroup({ items, heading }: Props) {
+
 
     // arr[0] variable (sselectedIndex)
     // arr[1] updater function
@@ -23,7 +21,7 @@ function ListGroup() {
 
   return (
    <>
-    <h1>List</h1>
+    <h1>{heading}</h1>
     { /* writing Javascript in JSX markup */ 
         items.length === 0 && <p>No itemm found</p>
     }
