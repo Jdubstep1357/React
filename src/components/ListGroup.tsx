@@ -1,4 +1,4 @@
-import type { MouseEvent } from "react";
+import { useState } from "react";
 
 // src/components/ListGroup.tsx
 function ListGroup() {
@@ -11,10 +11,14 @@ function ListGroup() {
         'Paris'
     ];
 
+    // arr[0] variable (sselectedIndex)
+    // arr[1] updater function
+    const [selectedIndex, setSelectedIndex] = useState(-1);
 
-    // Event Handler - Handles clcik Event
-    // type annation in typescript - specific type of variables, ect
-    const handleClick = (event:MouseEvent) => console.log(event);
+    // Hook - function that allows us to tap into built in features in React
+    useState('');
+
+
 
 
   return (
@@ -25,13 +29,16 @@ function ListGroup() {
     }
       <ul className="list-group">
 
-        {/* key: each list should have a uniquie key to keep track of items. when things are added or removed dynamically
-        react knows which things were updated */}
+        {/* 
+            key: each list should have a uniquie key to keep track of items. when things are added or removed dynamically
+        react knows which things were updated
+            classname = {}is how we render conetent dynamically{}
+         */}
         {items.map((item, index) => 
-        <li className="list-group-item" 
+        <li className={ selectedIndex === index ? 'list-group-item active' : 'list-group-item'}
         key={item} 
-        onClick={handleClick
-        }>{ item }
+        onClick={() => { setSelectedIndex(index); }}
+        >{ item }
         
         </li>)}
 
