@@ -46,13 +46,13 @@ function ListGroup({ items, heading, onSelectItem }: Props) {
 
   return (
    <>
+
     <h1>{heading}</h1>
     { /* writing Javascript in JSX markup */ 
         items.length === 0 && <p>No itemm found</p>
     }
     {/* <List> same as <ul className="list-group" */}
       <List>
-
         {/* 
             key: each list should have a uniquie key to keep track of items. when things are added or removed dynamically
         react knows which things were updated

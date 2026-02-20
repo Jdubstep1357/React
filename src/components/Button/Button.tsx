@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import styles from "./Button.module.css";
 
 
 interface Props {
@@ -10,10 +10,10 @@ interface Props {
     onClick: () => void;
 }
 
-const ReactButton =({ children, onClick, color }: Props) => {
+const ReactButton =({ children, onClick, color = "primary" }: Props) => {
     return (
     <>
-<button type="button" className={"btn btn-" + color} onClick={onClick}>{children}</button>
+<button type="button" className={[styles.btn, styles['btn-' + color]].join(' ')} onClick={onClick}>{children}</button>
 
     </>
     )

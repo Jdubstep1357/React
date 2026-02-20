@@ -1,7 +1,9 @@
 import Alert from "./components/Alert";
-import Button from "./components/Button";
+import Button from "./components/Button/Button";
 import { useState } from "react";
 import ListGroup from "./components/ListGroup";
+import styled from 'styled-components';
+import "./components/ListGroup/ListGroup.module.css";
 
 /* NOTES
 
@@ -28,6 +30,10 @@ import ListGroup from "./components/ListGroup";
 */
 
 
+const ButtonStyle = styled.button`
+  color: red`;
+
+
 function App() {
 
   // used in showing / hiding button when clicked
@@ -46,7 +52,9 @@ function App() {
     <>
       <ListGroup items={items} heading="Cities" onSelectItem={handleSelectItem} />
       { alertVisible && <Alert onClose={() => setAlertVisibility(false)}>My alert</Alert>}
-      <Button color="primary" onClick={() => setAlertVisibility(true)}>My button</Button>
+      {/* <Button color="primary" onClick={() => setAlertVisibility(true)}>My button</Button> */}
+
+      <Button onClick={() => {}}>My button</Button>
     </>
   )
 }
