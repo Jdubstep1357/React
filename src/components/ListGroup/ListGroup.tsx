@@ -1,6 +1,25 @@
 import { useState } from "react";
-// module
-import styles from "./ListGroup.module.css";
+import "./ListGroup.module.css";
+import styled from 'styled-components';
+
+
+
+
+const List = styled.ul`
+    list-style: none;
+    padding: 0;
+`;
+
+
+interface ListItemProps {
+    active: boolean;
+}
+
+{/* ${} template literal - checks if props are active or true  */}
+const ListItem = styled.li<ListItemProps>`
+    padding: 5px 0;
+    background: ${ props => props.active ? 'blue' : "none" }
+`
 
 interface Props {
     items: string[];
@@ -31,7 +50,8 @@ function ListGroup({ items, heading, onSelectItem }: Props) {
     { /* writing Javascript in JSX markup */ 
         items.length === 0 && <p>No itemm found</p>
     }
-      <ul className={[ styles.listGroup, styles.container ].join(' ')}>
+    {/* <List> same as <ul className="list-group" */}
+      <List>
 
         {/* 
             key: each list should have a uniquie key to keep track of items. when things are added or removed dynamically
@@ -39,21 +59,19 @@ function ListGroup({ items, heading, onSelectItem }: Props) {
             classname = {}is how we render conetent dynamically{}
          */}
         {items.map((item, index) => 
-        <li className={ selectedIndex === index ? 'list-group-item active' : 'list-group-item'}
-        key={item} 
-        onClick={() => { 
-            setSelectedIndex(index); 
-            onSelectItem(item);
-        }}
+        <ListItem 
+            active={index === selectedIndex}
+            key={item} 
+            onClick={() => { 
+                setSelectedIndex(index); 
+                onSelectItem(item);
+            }}
         >{ item }
         
-        </li>)}
-
-   
+        </ListItem>)}
 
 
-
-      </ul>
+      </List>
   </>
   )
 }
