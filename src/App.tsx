@@ -4,6 +4,7 @@ import { useState } from "react";
 import ListGroup from "./components/ListGroup";
 import styled from 'styled-components';
 import "./components/ListGroup/ListGroup.module.css";
+import Like from "./components/Like";
 
 /* NOTES
 
@@ -50,11 +51,13 @@ function App() {
 
   return (
     <>
-      <ListGroup items={items} heading="Cities" onSelectItem={handleSelectItem} />
-      { alertVisible && <Alert onClose={() => setAlertVisibility(false)}>My alert</Alert>}
+      {/* <ListGroup items={items} heading="Cities" onSelectItem={handleSelectItem} />
+      { alertVisible && <Alert onClose={() => setAlertVisibility(false)}>My alert</Alert>} */}
       {/* <Button color="primary" onClick={() => setAlertVisibility(true)}>My button</Button> */}
 
-      <Button onClick={() => {}}>My button</Button>
+      {/* Like button from Styling Components */}
+      <Like onClick={() => console.log('clicked')} />
+      {/* <Button onClick={() => {}}>My button</Button> */}
     </>
   )
 }
