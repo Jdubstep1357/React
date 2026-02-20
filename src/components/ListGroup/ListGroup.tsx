@@ -1,5 +1,6 @@
 import { useState } from "react";
-import "./ListGroup.css";
+// module
+import styles from "./ListGroup.module.css";
 
 interface Props {
     items: string[];
@@ -30,7 +31,7 @@ function ListGroup({ items, heading, onSelectItem }: Props) {
     { /* writing Javascript in JSX markup */ 
         items.length === 0 && <p>No itemm found</p>
     }
-      <ul className="list-group">
+      <ul className={[ styles.listGroup, styles.container ].join(' ')}>
 
         {/* 
             key: each list should have a uniquie key to keep track of items. when things are added or removed dynamically

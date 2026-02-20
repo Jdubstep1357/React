@@ -1,0 +1,12 @@
+/* Module allows us to use localized styling
+    No parent styling over-riding styling here
+*/
+
+.listGroup {
+    list-style: none;
+    padding: 0;
+}
+
+.container {
+    background: yellow;
+}
