@@ -28,6 +28,14 @@ import Like from "./components/Like";
   rafce -- React Arrow Function Component Export
   -- type rafce in blank React document
 
+
+  State Hook
+    -- React updates state asynchronously
+    -- State is stored outside of components
+    -- Use hooks at top level of component (const [isApproved, setApproved] = useState(true))
+    -- Web hooks used in making heart icon turn on and off based on click
+
+
 */
 
 
@@ -36,28 +44,46 @@ const ButtonStyle = styled.button`
 
 
 function App() {
-
-  // used in showing / hiding button when clicked
-  // when clicked set setAlertVisibility to true instead of false
-  // onClose cojmes from Alert.tsx which notifies when user clicks on close button. once it's clicked it's set to false
+  
+  // used for heart icon on off - <Like> component
   const [alertVisible, setAlertVisibility] = useState(false);
-
-  // for cities every time you click on a city it logs it in console
-  let items = ["New York", "San Fransisco", "Tokyo", "London"];
-
   const handleSelectItem = (item: string) => {
     console.log(item);
   }
 
+  // Lesson for Managing Component State 2 - Understanding State Hook
+
+  let count = 0;
+  
+  const [isVisible, setVisibility] = useState(false);
+  const handleClick = () => {
+    setVisibility(true);
+
+    // will not add due to App calling count from function, which is set to 0 each time called
+    count++;
+    console.log(isVisible);
+  }
+
+
+  let items = ["New York", "San Fransisco", "Tokyo", "London"];
+
+
+
   return (
     <>
+    <button onClick={handleClick}>Show</button>
+
+
       {/* <ListGroup items={items} heading="Cities" onSelectItem={handleSelectItem} />
-      { alertVisible && <Alert onClose={() => setAlertVisibility(false)}>My alert</Alert>} */}
-      {/* <Button color="primary" onClick={() => setAlertVisibility(true)}>My button</Button> */}
+      <Button color="primary" onClick={() => setAlertVisibility(true)}>My button</Button>
+      <Button onClick={() => {}}>My button</Button> */}
 
       {/* Like button from Styling Components */}
-      <Like onClick={() => console.log('clicked')} />
-      {/* <Button onClick={() => {}}>My button</Button> */}
+      {/* <Like onClick={() => console.log('clicked')} /> */}
+
+      {/* Shows popup based upon other things */}
+      {/* { alertVisible && <Alert onClose={() => setAlertVisibility(false)}>My alert</Alert>} */}
+
     </>
   )
 }
