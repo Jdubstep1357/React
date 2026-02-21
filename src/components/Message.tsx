@@ -1,4 +1,4 @@
-// 4_Managing_Component_State_Purity
+// 4_Managing_Component_State_Purity .
 
 // returns same value 
         let count = 0;
