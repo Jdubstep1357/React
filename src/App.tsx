@@ -40,17 +40,13 @@ import ListGroup from "./components/ListGroup/ListGroup";
 
 */
 
-
-
-
-
 function App() {
+  let items = ["New York", "San Fransisco", "Tokyo", "London"];
 
-
-// Outputs 4 of the same answer
+  // items and heading is declared in ListGroup.tsx
   return (
     <>
-      <ListGroup />
+      <ListGroup items={items} heading="Cities" />
     </>
   );
 }

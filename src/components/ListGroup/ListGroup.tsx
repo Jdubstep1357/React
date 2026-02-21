@@ -1,23 +1,20 @@
 import { useState } from "react";
 
-function ListGroup() {
-  let items = ["New York", "San Fransisco", "Tokyo", "London"];
+// { items: [], heading: string }
+// type annotation to specific type annotation
+interface Props {
+  items: string[];
+  heading: string;
+}
 
-  // use State makes selectedIndex work inside of <>
-  // Hook - taps into build in features in React
+// props Props - refers to Typescript validation
+function ListGroup({ items, heading }: Props) {
   const [selectedIndex, setSelectedIndex] = useState(-1);
-
-  const getMessage = () => {
-    {
-      /* this shows no results if no items in array - KEEPS <h1>List</h1> */
-    }
-    return items.length === 0 ? <p>No items found</p> : null;
-  };
 
   return (
     <>
-      <h1>List</h1>
-      {getMessage}
+      <h1>{heading}</h1>
+
       <ul className="list-group">
         {/* index shows the indexed position */}
         {/* event is event */}
