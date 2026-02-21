@@ -1,4 +1,5 @@
 import Message from "./components/Message";
+import ListGroup from "./components/ListGroup/ListGroup";
 
 /* NOTES
 
@@ -49,10 +50,7 @@ function App() {
 // Outputs 4 of the same answer
   return (
     <>
-      <Message />
-      <Message />
-      <Message />
-
+      <ListGroup />
     </>
   );
 }
