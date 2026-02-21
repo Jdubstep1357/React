@@ -1,9 +1,12 @@
+import type { MouseEvent } from "react";
+
 function ListGroup() {
   let items = ["New York", "San Fransisco", "Tokyo", "London"];
-  items = [];
 
   // displays no items found due to empty array
   //   if (items.length === 0) return <p>No item found</p>;
+
+  // Event
 
   const getMessage = () => {
     {
@@ -12,13 +15,24 @@ function ListGroup() {
     return items.length === 0 ? <p>No items found</p> : null;
   };
 
+  // event handler
+  const handleClick = (event: MouseEvent) => console.log(event);
+
   return (
     <>
       <h1>List</h1>
       {getMessage}
       <ul className="list-group">
-        {items.map((item) => (
-          <li key={item}>{item}</li>
+        {/* index shows the indexed position */}
+        {/* event is event */}
+        {items.map((item, index) => (
+          <li
+            className="list-group-item"
+            key={item}
+            onClick={() => console.log(item, index, handleClick)}
+          >
+            {item}
+          </li>
         ))}
       </ul>
     </>
