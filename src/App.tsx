@@ -35,6 +35,10 @@ import Like from "./components/Like";
     -- Use hooks at top level of component (const [isApproved, setApproved] = useState(true))
     -- Web hooks used in making heart icon turn on and off based on click 1
 
+  State Structure
+    -- Avoid redundant state variables
+    -- Group related variables inside an object
+    -- Avoid deeply nested structures
 
 */
 
@@ -52,7 +56,6 @@ function App() {
   }
 
   // Lesson for Managing Component State 2 - Understanding State Hook
-
   let count = 0;
   
   const [isVisible, setVisibility] = useState(false);
@@ -63,6 +66,27 @@ function App() {
     count++;
     console.log(isVisible);
   }
+
+  // 3_Managing_Component_State - Choosing State Structure
+
+  // PUT ALL THIS IN PERSON OBJECT
+  // const [firstName, setFirstName] = useState('');
+  // const [lastName, setLastName] = useState('');
+  // const fullName = firstName + ' ' + lastName;
+
+  const [person, setPerson] = useState({
+    firstName: '',
+    lastName: ''
+  })
+
+  const [isLoading, setLoading] = useState(false);
+
+  return (
+    <div>
+    </div>
+  );
+
+
 
 
   let items = ["New York", "San Fransisco", "Tokyo", "London"];
