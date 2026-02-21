@@ -1,4 +1,3 @@
-import Message from "./components/Message";
 import ListGroup from "./components/ListGroup/ListGroup";
 
 /* NOTES
@@ -43,10 +42,18 @@ import ListGroup from "./components/ListGroup/ListGroup";
 function App() {
   let items = ["New York", "San Fransisco", "Tokyo", "London"];
 
+  const handleSelectItem = (item: string) => {
+    console.log(item);
+  };
+
   // items and heading is declared in ListGroup.tsx
   return (
     <>
-      <ListGroup items={items} heading="Cities" />
+      <ListGroup
+        items={items}
+        heading="Cities"
+        onSelectItem={handleSelectItem}
+      />
     </>
   );
 }

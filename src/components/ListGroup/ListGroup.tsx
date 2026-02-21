@@ -1,14 +1,14 @@
 import { useState } from "react";
 
-// { items: [], heading: string }
-// type annotation to specific type annotation
 interface Props {
   items: string[];
   heading: string;
+  // (item: string) => void
+  onSelectItem: (item: string) => void;
 }
 
 // props Props - refers to Typescript validation
-function ListGroup({ items, heading }: Props) {
+function ListGroup({ items, heading, onSelectItem }: Props) {
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
   return (
@@ -28,7 +28,7 @@ function ListGroup({ items, heading }: Props) {
             key={item}
             onClick={() => {
               setSelectedIndex(index);
-              console.log(item, index);
+              onSelectItem(item);
             }}
           >
             {item}
