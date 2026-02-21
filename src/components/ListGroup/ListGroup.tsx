@@ -1,12 +1,11 @@
-import type { MouseEvent } from "react";
+import { useState } from "react";
 
 function ListGroup() {
   let items = ["New York", "San Fransisco", "Tokyo", "London"];
 
-  // displays no items found due to empty array
-  //   if (items.length === 0) return <p>No item found</p>;
-
-  // Event
+  // use State makes selectedIndex work inside of <>
+  // Hook - taps into build in features in React
+  const [selectedIndex, setSelectedIndex] = useState(-1);
 
   const getMessage = () => {
     {
@@ -14,9 +13,6 @@ function ListGroup() {
     }
     return items.length === 0 ? <p>No items found</p> : null;
   };
-
-  // event handler
-  const handleClick = (event: MouseEvent) => console.log(event);
 
   return (
     <>
@@ -27,9 +23,16 @@ function ListGroup() {
         {/* event is event */}
         {items.map((item, index) => (
           <li
-            className="list-group-item"
+            className={
+              selectedIndex === index
+                ? "list-group-item active"
+                : "list-group-item"
+            }
             key={item}
-            onClick={() => console.log(item, index, handleClick)}
+            onClick={() => {
+              setSelectedIndex(index);
+              console.log(item, index);
+            }}
           >
             {item}
           </li>
