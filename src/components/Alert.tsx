@@ -1,25 +1,16 @@
 import type { ReactNode } from "react";
 
-// passing text as props
-// children passes along to App.tsx
+// Children passes value to Parent file allowing it to be outputted
 interface Props {
-    children: ReactNode;
-    onClose: () => void;
+  children: ReactNode;
 }
-// onClose notifies parent that user has clicked on button
 
-// onClose clicks on button causing it to close
-
-
-// onClose passed to Alert to call function
-const Alert = ({ children, onClose }: Props) => {
+const Alert = ({ children }: Props) => {
   return (
-    <div className="alert alert-primary alert-dismissible">
-      { children }
-      <button type="button" className="btn-close" onClick={onClose} data-bs-dismiss="alert"></button>
-
+    <div className="alert alert-primary" role="alert">
+      {children}
     </div>
-  )
-}
+  );
+};
 
-export default Alert
+export default Alert;
