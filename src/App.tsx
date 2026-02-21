@@ -33,7 +33,7 @@ import Like from "./components/Like";
     -- React updates state asynchronously
     -- State is stored outside of components
     -- Use hooks at top level of component (const [isApproved, setApproved] = useState(true))
-    -- Web hooks used in making heart icon turn on and off based on click
+    -- Web hooks used in making heart icon turn on and off based on click 1
 
 
 */
