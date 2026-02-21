@@ -38,6 +38,7 @@
 */
 
 import Alert from "./components/Alert";
+import Button from "./components/Button/Button";
 
 function App() {
   return (
@@ -45,6 +46,9 @@ function App() {
       <Alert>
         Hello <span>World</span>
       </Alert>
+      <Button color="primary" onClick={() => console.log("Clicked")}>
+        My button
+      </Button>
     </>
   );
 }

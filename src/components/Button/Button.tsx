@@ -1,22 +1,24 @@
-import { useState } from "react";
-import styles from "./Button.module.css";
+import React from "react";
 
+function Text() {
+  console.log("clicked");
+}
 
 interface Props {
-    children: string;
-    // Can pass color value on <button> or in App.tsx <button>
-    // Only allows colors mentioned here
-    color?: 'primary' | 'secondary' | 'danger';
-    onClick: () => void;
+  children: string;
+  // only set value to specified here
+  color?: "primary" | "secondary" | "danger";
+  onClick: () => void;
 }
 
-const ReactButton =({ children, onClick, color = "primary" }: Props) => {
-    return (
-    <>
-<button type="button" className={[styles.btn, styles['btn-' + color]].join(' ')} onClick={onClick}>{children}</button>
+const Button = ({ children, onClick, color = "primary" }: Props) => {
+  return (
+    <div>
+      <button type="button" className={"btn btn-" + color} onClick={onClick}>
+        {children}
+      </button>
+    </div>
+  );
+};
 
-    </>
-    )
-}
-
-export default ReactButton;
+export default Button;
