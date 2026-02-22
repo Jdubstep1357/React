@@ -42,28 +42,27 @@
     -- Easier to delete than component
     -- Easier to style based on props/state
 
+  Choosing State Structure Best Practices
+    -- Avoid redundant state variables
+    -- Group related variables inside an object
+    -- Avoid deeply nested structures.
+
 */
 
-import ListGroup from "./components/ListGroup";
 import { useState } from "react";
-import Button from "./components/Button/Button";
-import Like from "./components/Like";
 
 function App() {
-  // stores away in other area. state is stored outside of component
-  const [isVisible, setVisibility] = useState(false);
-  const [isApproved, setApproved] = useState(true);
+  /* Put these in a useState object */
+  // const [firstName, lastName] = useState('');
+  // const [lastName, setLastName] = useState('');
 
-  const handleClick = () => {
-    setVisibility(true);
-    console.log(isVisible);
-  };
+  const [person, setPerson] = useState({
+    firstName: "",
+    lastName: "",
+  });
+  const [isLoading, setLoading] = useState(false);
 
-  return (
-    <div>
-      <button onClick={handleClick}>Show</button>
-    </div>
-  );
+  return <div></div>;
 }
 
 export default App;
