@@ -58,6 +58,7 @@
 */
 
 import { useState } from "react";
+import { produce } from "immer";
 
 function App() {
   const [bugs, setBugs] = useState([
@@ -66,12 +67,25 @@ function App() {
   ]);
 
   const handleClick = () => {
-    // when first button is clicked, mark bug as fixed
-    // on click, modifies fixed in id 1 to true, otherwise return same bug object (everything in array)
-    setBugs(bugs.map((bug) => (bug.id === 1 ? { ...bug, fixed: true } : bug)));
+    // setBugs(bugs.map((bug) => (bug.id === 1 ? { ...bug, fixed: true } : bug)));
+
+    // use immer
+    // draft is a proxy object that records changes we apply to main(bugs) array
+    setBugs(
+      produce((draft) => {
+        // draft is array bug
+        const bug = draft.find((bug) => bug.id === 1);
+        if (bug) bug.fixed = true;
+      }),
+    );
   };
   return (
     <div>
+      {bugs.map((bug) => (
+        <p key={bug.id}>
+          {bug.title} {bug.fixed ? "Fixed" : "New"}
+        </p>
+      ))}
       <button onClick={handleClick}>Click me</button>
     </div>
   );
