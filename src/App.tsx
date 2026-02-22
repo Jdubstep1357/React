@@ -20,22 +20,6 @@
   rafce -- React Arrow Function Component Export
   -- type rafce in blank React document
 
-
-  State Hook
-    -- React updates state asynchronously
-    -- State is stored outside of components
-    -- Use hooks at top level of component (const [isApproved, setApproved] = useState(true))
-    -- Web hooks used in making heart icon turn on and off based on click 1
-
-  State Structure
-    -- Avoid redundant state variables
-    -- Group related variables inside an object
-    -- Avoid deeply nested structures
-
-  Pure function
-    -- Given same input, always returns same result
-
-
   CSS-in-JS
     -- Scoped styles
     -- All the CSS & JS/TS code in one place
@@ -46,23 +30,38 @@
     -- Avoid redundant state variables
     -- Group related variables inside an object
     -- Avoid deeply nested structures.
+  
+  
+  State Hook
+    -- React updates state asynchronously
+    -- State is stored outside of components
+    -- Use hooks at top level of component (const [isApproved, setApproved] = useState(true))
+    -- Web hooks used in making heart icon turn on and off based on click 1
+
+  State Structure
+    -- Avoid redundant state variables
+    -- Group related variables inside an object
+    -- Avoid deeply nested structures
+  
+  
+  Pure function
+    -- Given same input, always returns same result
+
+  
 
 */
 
 import { useState } from "react";
+import Message from "./components/Message";
 
 function App() {
-  /* Put these in a useState object */
-  // const [firstName, lastName] = useState('');
-  // const [lastName, setLastName] = useState('');
-
-  const [person, setPerson] = useState({
-    firstName: "",
-    lastName: "",
-  });
-  const [isLoading, setLoading] = useState(false);
-
-  return <div></div>;
+  return (
+    <div>
+      <Message />
+      <Message />
+      <Message />
+    </div>
+  );
 }
 
 export default App;
