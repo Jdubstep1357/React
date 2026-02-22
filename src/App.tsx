@@ -46,6 +46,7 @@
 
 import ListGroup from "./components/ListGroup";
 import { useState } from "react";
+import Button from "./components/Button/Button";
 
 function App() {
   let items = ["New York", "San Fransisco", "Tokyo", "London"];
@@ -64,6 +65,8 @@ function App() {
         heading="Cities"
         onSelectItem={handleSelectItem}
       />
+
+      <Button onClick={() => console.log("This works")}>My text</Button>
     </>
   );
 }
