@@ -60,21 +60,16 @@
 import { useState } from "react";
 
 function App() {
-  const [tags, setTags] = useState(["happy", "cheerful"]);
+  const [bugs, setBugs] = useState([
+    { id: 1, title: "Bug 1", fixed: false },
+    { id: 2, title: "Bug 2", fixed: false },
+  ]);
 
   const handleClick = () => {
-    // add new item in array when clicked
-    // ... is spread operator
-    setTags([...tags, "exciting"]);
-
-    // Remove
-    setTags(tags.filter((tag) => tag !== "happy"));
+    // when first button is clicked, mark bug as fixed
+    // on click, modifies fixed in id 1 to true, otherwise return same bug object (everything in array)
+    setBugs(bugs.map((bug) => (bug.id === 1 ? { ...bug, fixed: true } : bug)));
   };
-
-  // Update
-  // change happy to happiness otherwise return tag itself
-  setTags(tags.map((tag) => (tag === "happy" ? "happiness" : tag)));
-
   return (
     <div>
       <button onClick={handleClick}>Click me</button>
