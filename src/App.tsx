@@ -50,9 +50,18 @@ import Button from "./components/Button/Button";
 import Like from "./components/Like";
 
 function App() {
+  // stores away in other area. state is stored outside of component
+  const [isVisible, setVisibility] = useState(false);
+  const [isApproved, setApproved] = useState(true);
+
+  const handleClick = () => {
+    setVisibility(true);
+    console.log(isVisible);
+  };
+
   return (
     <div>
-      <Like onClick={() => console.log("clicked")} />
+      <button onClick={handleClick}>Show</button>
     </div>
   );
 }
