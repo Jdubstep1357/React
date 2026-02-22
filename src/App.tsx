@@ -47,27 +47,13 @@
 import ListGroup from "./components/ListGroup";
 import { useState } from "react";
 import Button from "./components/Button/Button";
+import Like from "./components/Like";
 
 function App() {
-  let items = ["New York", "San Fransisco", "Tokyo", "London"];
-
-  const handleSelectItem = (item: string) => {
-    console.log(item);
-  };
-
-  // changes button on click to display Button
-  const [alertVisible, setAlertVisibility] = useState(false);
-
   return (
-    <>
-      <ListGroup
-        items={items}
-        heading="Cities"
-        onSelectItem={handleSelectItem}
-      />
-
-      <Button onClick={() => console.log("This works")}>My text</Button>
-    </>
+    <div>
+      <Like onClick={() => console.log("clicked")} />
+    </div>
   );
 }
 
