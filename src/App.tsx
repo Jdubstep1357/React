@@ -46,6 +46,12 @@
   
   Pure function
     -- Given same input, always returns same result
+  
+  Strict
+    -- React renders each component twice in Strict mode
+    -- 1st render used to detect and reporting issues with code
+    -- 2nd render updates user interface
+
 
   
 
@@ -57,8 +63,6 @@ import Message from "./components/Message";
 function App() {
   return (
     <div>
-      <Message />
-      <Message />
       <Message />
     </div>
   );
