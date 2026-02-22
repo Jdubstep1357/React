@@ -58,12 +58,31 @@
 */
 
 import { useState } from "react";
-import Message from "./components/Message";
 
 function App() {
+  const [drink, setDrink] = useState({
+    title: "Americano",
+    price: 5,
+  });
+
+  const handleClick = () => {
+    // const newDrink = {
+    //   // title: drink.title
+    //   ...drink,
+    //   price: 6,
+    // };
+    // setDrink(newDrink);
+
+    //   instead pf calling multiple properties, use spread operator
+    //   Copy all properties of drink object into new drink object and change value of price property
+    setDrink({ ...drink, price: 6 });
+  };
+
   return (
     <div>
-      <Message />
+      {drink.price}
+      {/* Click on button update price of drink */}
+      <button onClick={handleClick}>Click me</button>
     </div>
   );
 }
