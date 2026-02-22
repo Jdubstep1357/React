@@ -35,6 +35,13 @@
   Pure function
     -- Given same input, always returns same result
 
+
+  CSS-in-JS
+    -- Scoped styles
+    -- All the CSS & JS/TS code in one place
+    -- Easier to delete than component
+    -- Easier to style based on props/state
+
 */
 
 import ListGroup from "./components/ListGroup";

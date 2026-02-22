@@ -1,5 +1,22 @@
 import { useState } from "react";
 import styles from "./ListGroup.module.css";
+import styled from "styled-components";
+
+// CSS-In-JS
+const List = styled.ul`
+  list-style: none;
+  padding: 0;
+`;
+
+// Interface
+interface ListItemProps {
+  active: boolean;
+}
+
+const ListItem = styled.li<ListItemProps>`
+  padding: 5px 0;
+  background: ${(props) => (props.active ? "blue" : "none")};
+`;
 
 interface Props {
   items: string[];
@@ -10,22 +27,19 @@ interface Props {
 
 // props Props - refers to Typescript validation
 function ListGroup({ items, heading, onSelectItem }: Props) {
-  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   return (
     <>
       <h1>{heading}</h1>
 
-      <ul className={[styles.listGroup, styles.container].join(" ")}>
+      {/* List comes from up top */}
+      <List>
         {/* index shows the indexed position */}
         {/* event is event */}
         {items.map((item, index) => (
-          <li
-            className={
-              selectedIndex === index
-                ? "list-group-item active"
-                : "list-group-item"
-            }
+          <ListItem
+            active={index === selectedIndex}
             key={item}
             onClick={() => {
               setSelectedIndex(index);
@@ -33,9 +47,9 @@ function ListGroup({ items, heading, onSelectItem }: Props) {
             }}
           >
             {item}
-          </li>
+          </ListItem>
         ))}
-      </ul>
+      </List>
     </>
   );
 }
