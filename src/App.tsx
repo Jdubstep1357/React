@@ -60,24 +60,26 @@
 import { useState } from "react";
 
 function App() {
-  const [customer, setCustomer] = useState({
-    name: "John",
-    address: {
-      city: "San Fransisco",
-      zipCode: 94111,
-    },
-  });
+  const [tags, setTags] = useState(["happy", "cheerful"]);
 
   const handleClick = () => {
-    // spread operator is shalow. will reference same address in memory. bad if multiple customers have different addresses
-    // ensure state object is completely independing of existing state object
-    setCustomer({
-      ...customer,
-      address: { ...customer.address, zipCode: 94112 },
-    });
+    // add new item in array when clicked
+    // ... is spread operator
+    setTags([...tags, "exciting"]);
+
+    // Remove
+    setTags(tags.filter((tag) => tag !== "happy"));
   };
 
-  return <div></div>;
+  // Update
+  // change happy to happiness otherwise return tag itself
+  setTags(tags.map((tag) => (tag === "happy" ? "happiness" : tag)));
+
+  return (
+    <div>
+      <button onClick={handleClick}>Click me</button>
+    </div>
+  );
 }
 
 export default App;
