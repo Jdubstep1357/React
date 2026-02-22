@@ -60,31 +60,24 @@
 import { useState } from "react";
 
 function App() {
-  const [drink, setDrink] = useState({
-    title: "Americano",
-    price: 5,
+  const [customer, setCustomer] = useState({
+    name: "John",
+    address: {
+      city: "San Fransisco",
+      zipCode: 94111,
+    },
   });
 
   const handleClick = () => {
-    // const newDrink = {
-    //   // title: drink.title
-    //   ...drink,
-    //   price: 6,
-    // };
-    // setDrink(newDrink);
-
-    //   instead pf calling multiple properties, use spread operator
-    //   Copy all properties of drink object into new drink object and change value of price property
-    setDrink({ ...drink, price: 6 });
+    // spread operator is shalow. will reference same address in memory. bad if multiple customers have different addresses
+    // ensure state object is completely independing of existing state object
+    setCustomer({
+      ...customer,
+      address: { ...customer.address, zipCode: 94112 },
+    });
   };
 
-  return (
-    <div>
-      {drink.price}
-      {/* Click on button update price of drink */}
-      <button onClick={handleClick}>Click me</button>
-    </div>
-  );
+  return <div></div>;
 }
 
 export default App;
