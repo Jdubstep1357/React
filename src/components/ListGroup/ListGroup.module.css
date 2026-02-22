@@ -3,9 +3,13 @@
 */
 
 .listGroup {
-
+    list-style: none;
 }
 
 .BtnColor {
     color: green;
+}
+
+.container {
+    background: green;
 }

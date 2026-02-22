@@ -37,8 +37,6 @@
 
 */
 
-import Alert from "./components/Alert";
-import Button from "./components/Button/Button";
 import ListGroup from "./components/ListGroup";
 import { useState } from "react";
 
@@ -54,13 +52,6 @@ function App() {
 
   return (
     <>
-      {alertVisible && (
-        <Alert onClose={() => setAlertVisibility(false)}>My alert</Alert>
-      )}
-      <Button color="primary" onClick={() => setAlertVisibility(true)}>
-        My button
-      </Button>
-
       <ListGroup
         items={items}
         heading="Cities"
