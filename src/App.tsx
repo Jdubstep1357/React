@@ -58,19 +58,25 @@
 */
 
 import { useState } from "react";
-import NavBar from "./components/NavBar";
-import Cart from "./components/Cart";
 
 function App() {
-  const [cartItems, setcartItems] = useState(["Product1", "Product2"]);
+  // When user clicks button change name to something else
+  const [game, setGame] = useState({
+    id: 1,
+    player: {
+      name: "John",
+    },
+  });
 
-  return (
-    <div>
-      <NavBar cartItemsCount={cartItems.length} />
-      {/* onClear in Cart.tsx which clears the number of items in cart */}
-      <Cart cartItems={cartItems} onClear={() => setcartItems([])} />
-    </div>
-  );
+  const handleClick = () => {
+    // set player to new object
+    setGame({
+      ...game,
+      player: { ...game.player, ...game.player, name: "Bob" },
+    });
+  };
+
+  return <div></div>;
 }
 
 export default App;
