@@ -58,35 +58,17 @@
 */
 
 import { useState } from "react";
-import { produce } from "immer";
+import NavBar from "./components/NavBar";
+import Cart from "./components/Cart";
 
 function App() {
-  const [bugs, setBugs] = useState([
-    { id: 1, title: "Bug 1", fixed: false },
-    { id: 2, title: "Bug 2", fixed: false },
-  ]);
+  const [cartItems, setcartItems] = useState(["Product1", "Product2"]);
 
-  const handleClick = () => {
-    // setBugs(bugs.map((bug) => (bug.id === 1 ? { ...bug, fixed: true } : bug)));
-
-    // use immer
-    // draft is a proxy object that records changes we apply to main(bugs) array
-    setBugs(
-      produce((draft) => {
-        // draft is array bug
-        const bug = draft.find((bug) => bug.id === 1);
-        if (bug) bug.fixed = true;
-      }),
-    );
-  };
   return (
     <div>
-      {bugs.map((bug) => (
-        <p key={bug.id}>
-          {bug.title} {bug.fixed ? "Fixed" : "New"}
-        </p>
-      ))}
-      <button onClick={handleClick}>Click me</button>
+      <NavBar cartItemsCount={cartItems.length} />
+      {/* onClear in Cart.tsx which clears the number of items in cart */}
+      <Cart cartItems={cartItems} onClear={() => setcartItems([])} />
     </div>
   );
 }
