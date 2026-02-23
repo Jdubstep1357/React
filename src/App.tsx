@@ -58,30 +58,26 @@
 */
 
 import { useState } from "react";
+import ExpandableText from "./components/ExpandableText";
+
+// Lorem100 generates 100 words of lorem ipsum
 
 function App() {
-  const [cart, setCart] = useState({
-    discount: 0.1,
-    items: [
-      { id: 1, title: "Product 1", quantity: 1 },
-      { id: 2, title: "Product 2", quantity: 2 },
-    ],
-  });
-
-  const handleClick = () => {
-    //  when user clicks button, change quantty of id 1 to 2
-    // if item = id of 1, change quantity to plus one, otherwise return original item
-    setCart({
-      ...cart,
-      items: cart.items.map((item) =>
-        item.id === 1 ? { ...item, quantity: item.quantity + 1 } : item,
-      ),
-    });
-  };
-
   return (
     <div>
-      <button onClick={handleClick}>Click me</button>
+      <ExpandableText>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque non
+        architecto eum aperiam a. Saepe atque ipsam recusandae nihil, neque
+        doloremque sequi illo expedita adipisci facere ea eaque. Eius officiis
+        sapiente suscipit soluta corporis voluptas deserunt sequi minus velit
+        cupiditate sit unde excepturi deleniti libero, modi temporibus. Eos
+        eveniet ad natus veniam delectus aliquam! Tempore asperiores natus vitae
+        optio eaque beatae suscipit aut laudantium rem, officia perspiciatis
+        vero eveniet quaerat quidem consectetur voluptas. Dignissimos, aliquam?
+        Ea ullam laboriosam officiis minima corporis, nemo nulla ipsa mollitia
+        officia unde earum quas, impedit itaque dignissimos ducimus maiores
+        alias, quam perspiciatis atque esse explicabo.
+      </ExpandableText>
     </div>
   );
 }
