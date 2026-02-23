@@ -2,8 +2,20 @@ import type { FormEvent } from "react";
 import { useState } from "react";
 import { useForm, type FieldValues } from "react-hook-form";
 
+// defines shape of form
+interface FormData {
+  name: string;
+  age: number;
+}
+
 const Form = () => {
-  const { register, handleSubmit } = useForm();
+  // destructure formState property
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    // FormData shapes form with checks
+  } = useForm<FormData>();
 
   // FieldValues comes from hovering over handleSubmit((data))
   const onSubmit = (data: FieldValues) => console.log(data);
@@ -17,11 +29,21 @@ const Form = () => {
           Name
         </label>
         <input
-          {...register("name")}
+          // data validation will not submit
+          {...register("name", { required: true, minLength: 3 })}
           id="name"
           type="text"
           className="form-control"
         />
+        {/* ? is used because name can be empty */}
+        {/* ? and . is optional chaining in javascript */}
+        {/* Accessing errors object for error message if submitted incorrectly */}
+        {errors.name?.type === "required" && (
+          <p className="text-danger">The name field is required</p>
+        )}
+        {errors.name?.type === "minLength" && (
+          <p className="text-danger">The name must be at least 3 characters</p>
+        )}
       </div>
       <div className="mb-3">
         <label htmlFor="age" className="form-label">
