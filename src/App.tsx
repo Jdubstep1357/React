@@ -57,27 +57,14 @@
 
 */
 
-import { useState } from "react";
-import ExpandableText from "./components/ExpandableText";
+import Form from "./components/Form";
 
 // Lorem100 generates 100 words of lorem ipsum
 
 function App() {
   return (
     <div>
-      <ExpandableText>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque non
-        architecto eum aperiam a. Saepe atque ipsam recusandae nihil, neque
-        doloremque sequi illo expedita adipisci facere ea eaque. Eius officiis
-        sapiente suscipit soluta corporis voluptas deserunt sequi minus velit
-        cupiditate sit unde excepturi deleniti libero, modi temporibus. Eos
-        eveniet ad natus veniam delectus aliquam! Tempore asperiores natus vitae
-        optio eaque beatae suscipit aut laudantium rem, officia perspiciatis
-        vero eveniet quaerat quidem consectetur voluptas. Dignissimos, aliquam?
-        Ea ullam laboriosam officiis minima corporis, nemo nulla ipsa mollitia
-        officia unde earum quas, impedit itaque dignissimos ducimus maiores
-        alias, quam perspiciatis atque esse explicabo.
-      </ExpandableText>
+      <Form />
     </div>
   );
 }
