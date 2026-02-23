@@ -1,31 +1,23 @@
 import type { FormEvent } from "react";
 import { useState } from "react";
+import { useForm, type FieldValues } from "react-hook-form";
 
 const Form = () => {
-  const [person, setPerson] = useState({
-    name: "",
-    age: "",
-  });
+  const { register, handleSubmit } = useForm();
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
-    console.log(person);
-  };
+  // FieldValues comes from hovering over handleSubmit((data))
+  const onSubmit = (data: FieldValues) => console.log(data);
 
   return (
     // preventDefault behavior whereas submitted normally reloads page without console.log
-    <form onSubmit={handleSubmit}>
+    // handleSubmit function recieves data in form. after form submitted call form submission
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-3">
         <label htmlFor="name" className="form-label">
           Name
         </label>
         <input
-          onChange={(event) =>
-            setPerson({ ...person, name: event.target.value })
-          }
-          // make react a single source of truth
-          // input field always relies on value of state input field
-          value={person.name}
+          {...register("name")}
           id="name"
           type="text"
           className="form-control"
@@ -35,13 +27,9 @@ const Form = () => {
         <label htmlFor="age" className="form-label">
           Age
         </label>
-        {/* use parseInt due to age being declared as a number, string is originally an integer */}
         <input
-          /* Value not stored in DOM but updated in component state */
-          value={person.age}
-          onChange={(event) =>
-            setPerson({ ...person, age: event.target.value })
-          }
+          // Gets rid of onChange function and all that code. register makes it shorter and easier to use
+          {...register("age")}
           id="age"
           type="number"
           className="form-control"
