@@ -60,23 +60,22 @@
 import { useState } from "react";
 
 function App() {
-  // When user clicks button change name to something else
-  const [game, setGame] = useState({
-    id: 1,
-    player: {
-      name: "John",
-    },
+  const [pizza, setPizza] = useState({
+    name: "Spicy Pepperoni",
+    toppings: ["Mushrooms"],
   });
 
   const handleClick = () => {
-    // set player to new object
-    setGame({
-      ...game,
-      player: { ...game.player, ...game.player, name: "Bob" },
-    });
+    // click add new topping
+    // instead of using [], use {}
+    setPizza({ ...pizza, toppings: [...pizza.toppings, "Cheese"] });
   };
 
-  return <div></div>;
+  return (
+    <div>
+      <button onClick={handleClick}>Click me</button>
+    </div>
+  );
 }
 
 export default App;
