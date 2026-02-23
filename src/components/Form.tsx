@@ -1,8 +1,14 @@
-import React from "react";
+import type { SubmitEvent } from "react";
 
 const Form = () => {
+  const handleSubmit = (event: SubmitEvent) => {
+    event.preventDefault();
+    console.log("submitted");
+  };
+
   return (
-    <form>
+    // preventDefault behavior whereas submitted normally reloads page without console.log
+    <form onSubmit={handleSubmit}>
       <div className="mb-3">
         <label htmlFor="name" className="form-label">
           Name
