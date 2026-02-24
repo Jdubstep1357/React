@@ -1,6 +1,15 @@
-import type { FormEvent } from "react";
-import { useState } from "react";
 import { useForm, type FieldValues } from "react-hook-form";
+// zod is used for validation
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const schema = z.object({
+  name: z.string().min(3, { message: "name must be at least 3 characters" }),
+  age: z.number().min(18, { message: "You must be at least 18 years old" }),
+});
+
+// helps to make better custom validation logic
+type formData = z.infer<typeof schema>;
 
 // defines shape of form
 interface FormData {
@@ -15,7 +24,7 @@ const Form = () => {
     handleSubmit,
     formState: { errors },
     // FormData shapes form with checks
-  } = useForm<FormData>();
+  } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   // FieldValues comes from hovering over handleSubmit((data))
   const onSubmit = (data: FieldValues) => console.log(data);
@@ -29,8 +38,8 @@ const Form = () => {
           Name
         </label>
         <input
-          // data validation will not submit
-          {...register("name", { required: true, minLength: 3 })}
+          // all validation rules defined in schema
+          {...register("name")}
           id="name"
           type="text"
           className="form-control"
@@ -38,12 +47,7 @@ const Form = () => {
         {/* ? is used because name can be empty */}
         {/* ? and . is optional chaining in javascript */}
         {/* Accessing errors object for error message if submitted incorrectly */}
-        {errors.name?.type === "required" && (
-          <p className="text-danger">The name field is required</p>
-        )}
-        {errors.name?.type === "minLength" && (
-          <p className="text-danger">The name must be at least 3 characters</p>
-        )}
+        {errors.name && <p className="text-danger">{errors.name.message}</p>}
       </div>
       <div className="mb-3">
         <label htmlFor="age" className="form-label">
@@ -51,11 +55,12 @@ const Form = () => {
         </label>
         <input
           // Gets rid of onChange function and all that code. register makes it shorter and easier to use
-          {...register("age")}
+          {...register("age", { valueAsNumber: true })}
           id="age"
           type="number"
           className="form-control"
         />
+        {errors.name && <p className="text-danger">{errors.age?.message}</p>}
       </div>
       <button className="btn-primary" type="submit">
         Submit
