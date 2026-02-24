@@ -1,6 +1,6 @@
 import React from "react";
 import ExpenseList from "./ExpenseList";
-import { categories } from "../../App";
+import categories from "../Categories";
 
 interface Props {
   onSelectCategory: (category: string) => void;
