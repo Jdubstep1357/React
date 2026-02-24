@@ -22,7 +22,7 @@ const Form = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     // FormData shapes form with checks
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
@@ -62,7 +62,8 @@ const Form = () => {
         />
         {errors.name && <p className="text-danger">{errors.age?.message}</p>}
       </div>
-      <button className="btn-primary" type="submit">
+      {/* disabled disables button unless valid */}
+      <button disabled={!isValid} className="btn-primary" type="submit">
         Submit
       </button>
     </form>
