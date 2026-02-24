@@ -59,10 +59,14 @@
 
 import Form from "./components/Form";
 import ExpenseFilter from "./expense-tracker/components/ExpenseFilter";
+import ExpenseForm from "./expense-tracker/components/ExpenseForm";
 import ExpenseList from "./expense-tracker/components/ExpenseList";
 import { useState } from "react";
 
 // Lorem100 generates 100 words of lorem ipsum
+
+// Used for building expense form over in ExpenseFilter.tsx
+export const categories = ["Groceries", "Utilites", "Entertainment"];
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -81,6 +85,9 @@ function App() {
 
   return (
     <div>
+      <div className="bm-5">
+        <ExpenseForm />
+      </div>
       <div className="mb-3">
         <ExpenseFilter
           onSelectCategory={(category) => setSelectedCategory(category)}
