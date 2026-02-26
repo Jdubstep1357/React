@@ -149,10 +149,32 @@ function App() {
       });
   };
 
+  // ADDING USERS
+  const addUser = () => {
+    // restores list to original state
+    const originalUsers = [...users];
+    const newUser = { id: 0, name: "Mosh" };
+    setUsers([newUser, ...users]);
+
+    axios
+      // When click on add, error message appears and stops uplad of new user
+      .post("https://jsonplaceholder.typicode.com/xusers", newUser)
+      // Makes saved User than other way
+      .then(({ data: savedUser }) => setUsers([savedUser, ...users]))
+      .catch((err) => {
+        setError(err.message);
+        setUsers(originalUsers);
+      });
+  };
+
   return (
     <>
       {error && <p className="text-danger">{error}</p>}
       {isLoading && <div className="spinner-border"></div>}
+      <button className="btn btn-primary mb-3" onClick={addUser}>
+        Add
+      </button>
+
       <ul className="list-group">
         {users.map((user) => (
           // d-flex makes button appear on right of screen
