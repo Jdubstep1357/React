@@ -90,8 +90,10 @@
 
 */
 
-import axios, { AxiosError, CanceledError } from "axios";
+// INSTEAD OF LONG URL, make it shorter by plugging it in at api-client
+
 import { useState, useEffect } from "react";
+import apiClient, { CanceledError } from "./services/api-client";
 
 // use typescript to get specific ID -
 interface User {
@@ -104,8 +106,6 @@ interface User {
 function App() {
   const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState("");
-
-  // show loading screen while waiting
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -115,8 +115,9 @@ function App() {
 
     setLoading(true);
 
-    axios
-      .get<User[]>("https://jsonplaceholder.typicode.com/users", {
+    // apiClient send get to users endpoint
+    apiClient
+      .get<User[]>("/users", {
         signal: controller.signal,
       })
       .then((res) => {
@@ -140,13 +141,11 @@ function App() {
     setUsers(users.filter((u) => u.id !== user.id));
 
     // Persist changes so we see deletes on server as well
-    axios
-      .delete("https://jsonplaceholder.typicode.com/users/" + user.id)
-      .catch((err) => {
-        setError(err.message);
-        // if error set back to original users
-        setUsers(originalUsers);
-      });
+    apiClient.delete("/users/" + user.id).catch((err) => {
+      setError(err.message);
+      // if error set back to original users
+      setUsers(originalUsers);
+    });
   };
 
   // ADDING USERS
@@ -156,9 +155,9 @@ function App() {
     const newUser = { id: 0, name: "Mosh" };
     setUsers([newUser, ...users]);
 
-    axios
+    apiClient
       // When click on add, error message appears and stops uplad of new user
-      .post("https://jsonplaceholder.typicode.com/users", newUser)
+      .post("/users", newUser)
       // Makes saved User than other way
       .then(({ data: savedUser }) => setUsers([savedUser, ...users]))
       .catch((err) => {
@@ -175,15 +174,10 @@ function App() {
     setUsers(users.map((u) => (u.id === user.id ? updatedUser : u)));
 
     // call server to save changes. axios.patch or axios.put
-    axios
-      .patch(
-        "https://jsonplaceholder.typicode.com/users/" + user.id,
-        updatedUser,
-      )
-      .catch((err) => {
-        setError(err.message);
-        setUsers(originalUsers);
-      });
+    apiClient.patch("/users/" + user.id, updatedUser).catch((err) => {
+      setError(err.message);
+      setUsers(originalUsers);
+    });
   };
 
   return (
