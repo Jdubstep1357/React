@@ -64,7 +64,18 @@
   
     // Promise
       -- An object that holds the eventual result or failure of an asynchronous (long running) operation
+    
+    // HTTP - HyperText Transfer Protocol
+      -- A protocol for transferring data over the internet
+      -- Broswer requests server. server responds with html,css or other resources to do whatever
 
+      -- Request and Response
+        ---Request:
+            Header - Metadata
+            Body: Data
+        ---Response:
+            Header - Metadata
+            Body: data
   
 
 */
@@ -83,6 +94,7 @@ function App() {
 
   // call servers
   // from jsonplaceholder.com
+  //<User[]> specifies the array
   useEffect(() => {
     axios
       .get<User[]>("https://jsonplaceholder.typicode.com/users")
