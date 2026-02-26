@@ -76,11 +76,11 @@
         ---Response:
             Header - Metadata
             Body: data
-  
+    // CTRL . allows one to use import instead of manually doing so
 
 */
 
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useState, useEffect } from "react";
 
 // use typescript to get specific ID -
@@ -97,10 +97,23 @@ function App() {
   // from jsonplaceholder.com
   //.catch() checks for error
   useEffect(() => {
-    axios
-      .get<User[]>("https://jsonplaceholder.typicode.com/users")
-      .then((res) => setUsers(res.data))
-      .catch((err) => setError(err.message));
+    // async function
+    const fetchUsers = async () => {
+      try {
+        // get -> await promise -> res / err
+        const res = await axios.get<User[]>(
+          "https://jsonplaceholder.typicode.com/users",
+        );
+        setUsers(res.data);
+      } catch (err) {
+        setError((err as AxiosError).message);
+      }
+    };
+
+    fetchUsers();
+    // get -> await proise -> res / err
+    // .then((res) => setUsers(res.data))
+    // .catch((err) => setError(err.message));
   }, []);
 
   return (

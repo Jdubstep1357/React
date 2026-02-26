@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 // inline interface from typescript
 const ProductList = ({ category }: { category: string }) => {
   // string tells what kinds of information is acceotable to put in new array
+  // reason for <stringp[]> -- [] used to check if it is a string inside of array
   const [products, setProducts] = useState<string[]>([]);
 
   useEffect(() => {
