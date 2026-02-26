@@ -57,22 +57,45 @@
   Effect Hooke - Execute a piece of code after a component is rendered
   useEffect( () => {} )
 
+  // Fetching Data
+    -- fetch() -> sends data from browser
+    -- axios - Library
+
+  
+    // Promise
+      -- An object that holds the eventual result or failure of an asynchronous (long running) operation
+
   
 
 */
 
-import { useEffect, useRef, useState } from "react";
-import ProductList from "./components/ProductList";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
-const connect = () => console.log("Connecting");
-const disconnect = () => console.log("Disconnecting");
+// use typescript to get specific ID
+interface User {
+  id: number;
+  name: string;
+}
 
 function App() {
-  useEffect(() => {
-    connect();
+  const [usersn, setUsers] = useState<User[]>([]);
 
-    return () => disconnect();
-  });
+  // call servers
+  // from jsonplaceholder.com
+  useEffect(() => {
+    axios
+      .get<User[]>("https://jsonplaceholder.typicode.com/users")
+      .then((res) => setUsers(res.data));
+  }, []);
+
+  return (
+    <ul>
+      {usersn.map((users) => (
+        <li key={users.id}>{users.name}</li>
+      ))}
+    </ul>
+  );
 }
 
 export default App;
