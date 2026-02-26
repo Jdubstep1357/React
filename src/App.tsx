@@ -76,7 +76,7 @@
         ---Response:
             Header - Metadata
             Body: data
-    // CTRL . allows one to use import instead of manually doing so
+    // CTRL . allows one to use import instead of manually doing so -
 
 */
 
