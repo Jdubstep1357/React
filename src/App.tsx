@@ -83,7 +83,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-// use typescript to get specific ID
+// use typescript to get specific ID -
 interface User {
   id: number;
   name: string;
