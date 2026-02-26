@@ -80,7 +80,7 @@
 
 */
 
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, CanceledError } from "axios";
 import { useState, useEffect } from "react";
 
 // use typescript to get specific ID -
@@ -89,15 +89,27 @@ interface User {
   name: string;
 }
 
+// Cancelling fetch requests allow website to have animations reset if a user leaves a page and comes back later
+
 function App() {
   const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
+    // Allows to abort or cancel out requests
+
+    const controller = new AbortController();
     axios
-      .get<User[]>("https://jsonplaceholder.typicode.com/users")
+      .get<User[]>("https://jsonplaceholder.typicode.com/users", {
+        signal: controller.signal,
+      })
       .then((res) => setUsers(res.data))
-      .catch((err) => setError(err.message));
+      .catch((err) => {
+        if (err instanceof CanceledError) return;
+        setError(err.message);
+      });
+
+    return () => controller.abort();
   }, []);
 
   return (
