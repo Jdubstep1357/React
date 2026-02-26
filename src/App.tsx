@@ -158,9 +158,28 @@ function App() {
 
     axios
       // When click on add, error message appears and stops uplad of new user
-      .post("https://jsonplaceholder.typicode.com/xusers", newUser)
+      .post("https://jsonplaceholder.typicode.com/users", newUser)
       // Makes saved User than other way
       .then(({ data: savedUser }) => setUsers([savedUser, ...users]))
+      .catch((err) => {
+        setError(err.message);
+        setUsers(originalUsers);
+      });
+  };
+
+  // UPDATING USER
+  const updateUser = (user: User) => {
+    const originalUsers = [...users];
+    const updatedUser = { ...user, name: user.name + "!" };
+    // if the id of current user equals user that is passed to function return updated function, otherwise return same user object
+    setUsers(users.map((u) => (u.id === user.id ? updatedUser : u)));
+
+    // call server to save changes. axios.patch or axios.put
+    axios
+      .patch(
+        "https://jsonplaceholder.typicode.com/users/" + user.id,
+        updatedUser,
+      )
       .catch((err) => {
         setError(err.message);
         setUsers(originalUsers);
@@ -182,13 +201,21 @@ function App() {
             key={user.id}
             className="list-group-item d-flex justify-content-between"
           >
-            {user.name}{" "}
-            <button
-              className="btn btn-outline-danger"
-              onClick={() => deleteUser(user)}
-            >
-              Delete
-            </button>
+            {user.name}
+            <div>
+              <button
+                className="btn btn-outline-secondary mx-1"
+                onClick={() => updateUser(user)}
+              >
+                Update
+              </button>
+              <button
+                className="btn btn-outline-danger"
+                onClick={() => deleteUser(user)}
+              >
+                Delete
+              </button>
+            </div>
           </li>
         ))}
       </ul>
