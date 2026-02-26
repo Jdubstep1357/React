@@ -91,22 +91,27 @@ interface User {
 
 function App() {
   const [usersn, setUsers] = useState<User[]>([]);
+  const [error, setError] = useState("");
 
   // call servers
   // from jsonplaceholder.com
-  //<User[]> specifies the array
+  //.catch() checks for error
   useEffect(() => {
     axios
       .get<User[]>("https://jsonplaceholder.typicode.com/users")
-      .then((res) => setUsers(res.data));
+      .then((res) => setUsers(res.data))
+      .catch((err) => setError(err.message));
   }, []);
 
   return (
-    <ul>
-      {usersn.map((users) => (
-        <li key={users.id}>{users.name}</li>
-      ))}
-    </ul>
+    <>
+      {error && <p className="text-danger">{error}</p>}
+      <ul>
+        {usersn.map((users) => (
+          <li key={users.id}>{users.name}</li>
+        ))}
+      </ul>
+    </>
   );
 }
 
