@@ -108,7 +108,8 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
-    const { request, cancel } = userService.getAllUsers();
+    // <User> specifies what object call from server - generic
+    const { request, cancel } = userService.getAll<User>();
 
     request
       .then((res) => {
@@ -132,7 +133,7 @@ function App() {
     setUsers(users.filter((u) => u.id !== user.id));
 
     // Persist changes so we see deletes on server as well
-    userService.deleteUser(user.id).catch((err) => {
+    userService.delete(user.id).catch((err) => {
       setError(err.message);
       // if error set back to original users
       setUsers(originalUsers);
@@ -147,7 +148,7 @@ function App() {
     setUsers([newUser, ...users]);
 
     userService
-      .createUser(newUser)
+      .create(newUser)
       .then(({ data: savedUser }) => setUsers([savedUser, ...users]))
       .catch((err) => {
         setError(err.message);
@@ -163,7 +164,7 @@ function App() {
     setUsers(users.map((u) => (u.id === user.id ? updatedUser : u)));
 
     // call server to save changes. axios.patch or axios.put
-    userService.updateUser(updatedUser).catch((err) => {
+    userService.update(updatedUser).catch((err) => {
       setError(err.message);
       setUsers(originalUsers);
     });
