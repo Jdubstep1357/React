@@ -96,34 +96,15 @@ import { useState, useEffect } from "react";
 import { CanceledError } from "./services/api-client";
 import type { User } from "./services/user-service";
 import userService from "./services/user-service";
+import useUsers from "./hooks/useUsers";
 
 // use typescript to get specific ID -
 
 // Cancelling fetch requests allow website to have animations reset if a user leaves a page and comes back later
 
 function App() {
-  const [users, setUsers] = useState<User[]>([]);
-  const [error, setError] = useState("");
-  const [isLoading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    // <User> specifies what object call from server - generic
-    const { request, cancel } = userService.getAll<User>();
-
-    request
-      .then((res) => {
-        setUsers(res.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        if (err instanceof CanceledError) return;
-        setError(err.message);
-        setLoading(false);
-      });
-
-    return cancel; // ✅
-  }, []);
+  // use custom hook useUsers.ts to fetch list of users
+  const { users, error, isLoading, setUsers, setError } = useUsers();
 
   // DELETES USERS
   const deleteUser = (user: User) => {
