@@ -93,13 +93,11 @@
 // INSTEAD OF LONG URL, make it shorter by plugging it in at api-client
 
 import { useState, useEffect } from "react";
-import apiClient, { CanceledError } from "./services/api-client";
+import { CanceledError } from "./services/api-client";
+import type { User } from "./services/user-service";
+import userService from "./services/user-service";
 
 // use typescript to get specific ID -
-interface User {
-  id: number;
-  name: string;
-}
 
 // Cancelling fetch requests allow website to have animations reset if a user leaves a page and comes back later
 
@@ -109,17 +107,10 @@ function App() {
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Allows to abort or cancel out requests
-
-    const controller = new AbortController();
-
     setLoading(true);
+    const { request, cancel } = userService.getAllUsers();
 
-    // apiClient send get to users endpoint
-    apiClient
-      .get<User[]>("/users", {
-        signal: controller.signal,
-      })
+    request
       .then((res) => {
         setUsers(res.data);
         setLoading(false);
@@ -130,10 +121,10 @@ function App() {
         setLoading(false);
       });
 
-    return () => controller.abort();
+    return cancel; // ✅
   }, []);
 
-  // takes user object
+  // DELETES USERS
   const deleteUser = (user: User) => {
     const originalUsers = [...users];
 
@@ -141,7 +132,7 @@ function App() {
     setUsers(users.filter((u) => u.id !== user.id));
 
     // Persist changes so we see deletes on server as well
-    apiClient.delete("/users/" + user.id).catch((err) => {
+    userService.deleteUser(user.id).catch((err) => {
       setError(err.message);
       // if error set back to original users
       setUsers(originalUsers);
@@ -155,10 +146,8 @@ function App() {
     const newUser = { id: 0, name: "Mosh" };
     setUsers([newUser, ...users]);
 
-    apiClient
-      // When click on add, error message appears and stops uplad of new user
-      .post("/users", newUser)
-      // Makes saved User than other way
+    userService
+      .createUser(newUser)
       .then(({ data: savedUser }) => setUsers([savedUser, ...users]))
       .catch((err) => {
         setError(err.message);
@@ -174,7 +163,7 @@ function App() {
     setUsers(users.map((u) => (u.id === user.id ? updatedUser : u)));
 
     // call server to save changes. axios.patch or axios.put
-    apiClient.patch("/users/" + user.id, updatedUser).catch((err) => {
+    userService.updateUser(updatedUser).catch((err) => {
       setError(err.message);
       setUsers(originalUsers);
     });
