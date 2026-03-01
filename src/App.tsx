@@ -92,6 +92,8 @@
 
 // INSTEAD OF LONG URL, make it shorter by plugging it in at api-client
 
+// Test code before starting
+
 import { useState, useEffect } from "react";
 import { CanceledError } from "./services/api-client";
 import type { User } from "./services/user-service";
